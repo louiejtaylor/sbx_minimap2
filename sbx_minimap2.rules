@@ -1,5 +1,5 @@
 
-ruleorder minimap2_align > align_to_genome
+ruleorder: minimap2_align > align_to_genome
 
 rule minimap2_index:
     input:
