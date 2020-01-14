@@ -1,10 +1,25 @@
-rule example_rule:
-    input:
-        #files required for input	
-    output:
-        #files created after successful rule completion
-    conda:
-        "sbx_template_env.yml"
-    shell:
-        #commands run during rule
 
+ruleorder minimap2_align > align_to_genome
+
+rule minimap2_index:
+    input:
+        str(Cfg['mapping']['genomes_fp']/'{genome}.fasta')
+    output:
+        str(Cfg['mapping']['genomes_fp']/'{genome}.mmi')
+    conda:
+        "sbx_minimap2_env.yml"
+    shell:
+        "cd {Cfg[mapping][genomes_fp]} && minimap2 -x sr -d {output} {input}"
+
+rule minimap2_align:
+    input:
+        reads = expand(
+            str(QC_FP/'decontam'/'{{sample}}_{rp}.fastq.gz'),
+            rp = Pairs),
+        index = rules.minimap2_index.output
+    output:
+        temp(str(MAPPING_FP/'intermediates'/'{genome}'/'{sample}.sam'))
+    conda:
+        "sbx_minimap2_env.yml"
+    shell:
+        "minimap2 -a {input.index} {input.reads} > {output}"

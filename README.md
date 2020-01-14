@@ -1,8 +1,8 @@
 # sbx_minimap2
 
-This is an extension to the [Sunbeam pipeline](https://github.com/sunbeam-labs/sunbeam) to use the minimap2 aligner *instead of* bwa-mem during the mapping step. **Note that this extension supersedes mapping with bwa-mem if it is installed**
+This is an extension to the [Sunbeam pipeline](https://github.com/sunbeam-labs/sunbeam) to use the [minimap2 aligner](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778) *instead of* bwa-mem during the mapping step. **Note that this extension supersedes mapping with bwa-mem if it is installed.**
 
-## Installing an extension
+## Installing
 
 Extension install is as simple as passing the extension's URL on GitHub to `sunbeam extend`:
 
@@ -10,7 +10,7 @@ Extension install is as simple as passing the extension's URL on GitHub to `sunb
 
 Installation instructions for older versions of Sunbeam are included at the end of this README.
 
-## Running an extension
+## Running
 
 To run the extension, simply run Sunbeam as usual, requesting `all_mapping` as the target rule:
 
